@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'sample_feature/sample_item_details_view.dart';
-import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'views/home_page.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -56,9 +55,38 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
-          themeMode: settingsController.themeMode,
+          theme: ThemeData(
+            primaryColor: const Color(0xFF002664), // Deep Blue - Toastmasters Primary Color
+            scaffoldBackgroundColor: const Color(0xFFF4F4F4), // Jasnoszare tło
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF002664), // Deep Blue
+              secondary: Color(0xFFD69A2E), // Gold - Toastmasters Accent Color
+              surface: Color(0xFFF4F4F4), // Light Gray
+              onPrimary: Colors.white, 
+              onSecondary: Colors.black, 
+              onSurface: Colors.black, 
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xFF002664),
+              foregroundColor: Colors.white,
+            ),
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(fontFamily: 'Roboto', fontSize: 16, color: Colors.black),
+              bodyMedium: TextStyle(fontFamily: 'Roboto', fontSize: 14, color: Colors.black),
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFD69A2E), // Gold
+                foregroundColor: Colors.black, 
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+              ),
+            ),
+          ),
+
+
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -69,11 +97,8 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return const HomePage();
                 }
               },
             );
